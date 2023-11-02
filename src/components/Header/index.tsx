@@ -11,7 +11,7 @@ export default function Header() {
 				<Image src={logo} className="w-28" alt="Logo Acme" />
 			</Link>
 			<Input icon={<Search size={28} strokeWidth={3} />} />
-			<div className="flex items-center justify-end gap-32">
+			<nav className="flex items-center justify-end gap-32">
 				<Link
 					href={'/'}
 					className="text-2xl font-bold font-sans text-secondary hover:text-primary"
@@ -21,7 +21,7 @@ export default function Header() {
 				<button className="text-secondary hover:text-primary">
 					<ShoppingCart size={32} strokeWidth={3} />
 				</button>
-			</div>
+			</nav>
 		</header>
 	)
 }

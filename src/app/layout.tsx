@@ -9,7 +9,7 @@ const barlow = Barlow({
 })
 const khand = Khand({
 	subsets: ['latin'],
-	weight: '700',
+	weight: '400',
 	variable: '--font-khand',
 })
 
