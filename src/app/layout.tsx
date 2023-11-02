@@ -4,7 +4,7 @@ import './globals.css'
 
 const barlow = Barlow({
 	subsets: ['latin'],
-	weight: ['700', '400', '100'],
+	weight: ['900','700', '400', '100'],
 	variable: '--font-barlow',
 })
 const khand = Khand({
