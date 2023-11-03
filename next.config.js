@@ -8,6 +8,12 @@ const nextConfig = {
               port: '',
               pathname: '/id/**',
             },
+            {
+              protocol: 'https',
+              hostname: 'raw.githubusercontent.com',
+              port: '',
+              pathname: '/**',
+            }
           ],
     },
 }

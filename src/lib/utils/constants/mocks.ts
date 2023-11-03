@@ -1,4 +1,4 @@
-export const verbs = [
+export const VERBS = [
 	'Armário',
 	'Navio',
 	'Mala',
@@ -51,7 +51,7 @@ export const verbs = [
 	'Canga',
 ]
 
-export const adjectives = [
+export const ADJECTIVES = [
 	'prepotente',
 	'valioso',
 	'legítimo',
