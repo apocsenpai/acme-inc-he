@@ -3,6 +3,7 @@ import { Barlow, Khand } from 'next/font/google'
 import './globals.css'
 
 import Cart from '@/components/Cart'
+import Providers from '@/contexts/Providers'
 
 const barlow = Barlow({
 	subsets: ['latin'],
@@ -30,8 +31,10 @@ export default function RootLayout({
 			<body
 				className={`${barlow.variable} ${khand.variable} font-sans text-secondary`}
 			>
-				{children}
-				<Cart/>
+				<Providers>
+					{children}
+					<Cart />
+				</Providers>
 			</body>
 		</html>
 	)

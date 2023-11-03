@@ -18,6 +18,15 @@ const config: Config = {
 			boxShadow: {
 				header: '0px 2px 8px 0px #66201B1D',
 			},
+			animation:{
+				slideCart: 'slideToLeft 300ms ease-out forwards',
+			},
+			keyframes:{
+				slideToLeft: {
+					'0%': {right: '-100%'},
+					'100%': {right: '0'}
+				}
+			},
 			colors: {
 				primary: '#EE4246',
 				secondary: '#201B1D',

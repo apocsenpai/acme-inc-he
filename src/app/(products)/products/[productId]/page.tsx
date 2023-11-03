@@ -1,11 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import Banner from '@/components/Banner'
 import { IProduct } from '@/lib/interfaces/Products'
-import { getProductById } from '@/lib/services/productsApi'
+import { getProductById } from '@/lib/services/products'
 
 import bannerImage from '@/lib/assets/product-background.svg'
 import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
@@ -13,6 +13,8 @@ import Image from 'next/image'
 import { formatPrice } from '@/lib/helpers/formatters'
 import { ShoppingCart } from 'lucide-react'
 import Button from '@/components/Button'
+import { CartContext } from '@/contexts/CartContext'
+import { addItemToCart } from '@/lib/services/cart'
 
 interface IProductPage {
 	params: { productId: string };
@@ -27,6 +29,15 @@ export default function ProductPage({
 	const [imageError, setImageError] = useState(false)
 
 	const router = useRouter()
+
+	const { setActiveCart } = useContext(CartContext)
+
+	const addToCart = () => {
+		if (!product) return
+
+		setActiveCart(true)
+		addItemToCart(product)
+	}
 
 	useEffect(() => {
 		async function fetchProduct() {
@@ -51,7 +62,7 @@ export default function ProductPage({
 		<>
 			<Banner imagePath={bannerImage} product={true} />
 			<main className="flex flex-col items-center px-10 xl:px-40 py-16">
-				<div className='2xl:w-5/6'>
+				<div className="2xl:w-5/6">
 					<h1 className="text-7xl font-alt self-start mb-4">{product.name}</h1>
 					<div className="grid grid-cols-2 gap-6">
 						<div className="rounded-xl bg-primary w-full flex justify-center items-center overflow-hidden">
@@ -89,7 +100,7 @@ export default function ProductPage({
 									{product.discount && <>À vista no boleto ou PIX</>}
 								</p>
 							</div>
-							<Button>
+							<Button onClick={addToCart}>
 								<ShoppingCart size={32} strokeWidth={3} />
 								Comprar
 							</Button>

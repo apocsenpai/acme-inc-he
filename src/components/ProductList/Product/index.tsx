@@ -5,8 +5,10 @@ import Image from 'next/image'
 import { IProduct } from '@/lib/interfaces/Products'
 import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
 import { formatPrice } from '@/lib/helpers/formatters'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Link from 'next/link'
+import { CartContext } from '@/contexts/CartContext'
+import { addItemToCart } from '@/lib/services/cart'
 
 export default function Product({
 	id,
@@ -17,6 +19,13 @@ export default function Product({
 	discount,
 }: Readonly<IProduct>) {
 	const [imageError, setImageError] = useState(false)
+
+	const { setActiveCart } = useContext(CartContext)
+
+	const addToCart = () => {
+		setActiveCart(true)
+		addItemToCart({ id, name, description, imageUrl, price, discount })
+	}
 
 	return (
 		<li className="p-3 border flex flex-col justify-between border-secondary bg-background rounded-lg cursor-pointer group shadow-md hover:shadow-xl">
@@ -46,14 +55,15 @@ export default function Product({
 						</p>
 					)}
 					<p className="text-alternative font-black text-4xl">
-						R$ {formatPrice(discount ? price - price * IN_CASH_DISCOUNT : price)}
+						R${' '}
+						{formatPrice(discount ? price - price * IN_CASH_DISCOUNT : price)}
 					</p>
 					<p className="italic text-lg h-7 font-thin mb-4">
 						{discount && <>À vista no boleto ou PIX</>}
 					</p>
 				</div>
 			</Link>
-			<Button>
+			<Button onClick={addToCart}>
 				<ShoppingCart size={32} strokeWidth={3} />
 				Comprar
 			</Button>

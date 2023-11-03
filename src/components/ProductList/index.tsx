@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Product from './Product'
 
 import { IProduct } from '@/lib/interfaces/Products'
-import { getProducts } from '@/lib/services/productsApi'
+import { getProducts } from '@/lib/services/products'
 
 interface ProductListProps {
 	products?: string[];
