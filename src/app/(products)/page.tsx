@@ -12,9 +12,10 @@ export default function Home() {
 		<>
 			<Banner imagePath={bannerImage} />
 			<div className="px-10 xl:px-40 py-16">
-				<header className="flex items-center justify-between border-b-2 pb-4 border-secondary border-opacity-20">
+				<header className="flex items-center gap-10 border-b-2 pb-4 border-secondary border-opacity-20">
 					<h1 className="text-7xl font-alt">Nossos Produtos</h1>
-					<div className='flex gap-20 items-center'>
+					<div className='self-stretch w-[1px] bg-secondary bg-opacity-20'/>
+					<div className="flex gap-20 items-center">
 						<Dropdown
 							icon={<ListFilter size={36} strokeWidth={3} />}
 							title={'Filtrar'}
@@ -23,7 +24,7 @@ export default function Home() {
 						</Dropdown>
 					</div>
 				</header>
-				<ProductList products={[]}/>
+				<ProductList />
 			</div>
 		</>
 	)

@@ -7,7 +7,7 @@ export default function Button(props: ButtonProps) {
 		<button
 			className={`flex justify-center items-center gap-4 w-full text-3xl font-bold p-3 rounded-xl border
                     transition-all bg-secondary
-                    text-white hover:bg-alternative hover:text-secondary`}
+                    text-white hover:bg-alternative hover:text-secondary group-hover:bg-alternative`}
 			{...props}
 		>
 			{props.children}

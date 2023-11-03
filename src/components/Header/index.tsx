@@ -11,7 +11,7 @@ export default function Header() {
 				<Image src={logo} className="w-28" alt="Logo Acme" />
 			</Link>
 			<Input icon={<Search size={28} strokeWidth={3} />} />
-			<nav className="flex items-center justify-end gap-32">
+			<nav className="pl-20 flex items-center justify-between gap-4">
 				<Link
 					href={'/'}
 					className="text-2xl font-bold font-sans text-secondary hover:text-primary"

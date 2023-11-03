@@ -2,29 +2,56 @@ import Button from '@/components/Button'
 import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 
-export default function Product() {
+import { IProduct } from '@/lib/interfaces/Products'
+import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
+import { formatPrice } from '@/lib/helpers/formatters'
+import { useState } from 'react'
+
+export default function Product({
+	id,
+	name,
+	description,
+	imageUrl,
+	price,
+	discount,
+}: Readonly<IProduct>) {
+	const [imageError, setImageError] = useState(false)
+
 	return (
-		<li className="p-4 border border-secondary bg-background rounded-lg">
-			<Image
-				alt="The guitarist in the concert."
-				src={`https://picsum.photos/id/1/500/400`}
-				width={2250}
-				height={1390}
-				layout="responsive"
-				className="rounded-xl"
-			/>
-			<h2 className="font-bold text-4xl mt-3">Name</h2>
-			<p className="truncate mb-4">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-				porro sapiente velit nulla consectetur expedita quis fugiat cupiditate
-				provident nihil ab illum, cum, rerum quasi modi! Saepe nulla quia
-				obcaecati praesentium nobis dignissimos fuga. Vitae provident quia
-				expedita ducimus asperiores.
-			</p>
-            <p className='font-thin text-lg line-through opacity-60'>R$ 300,00</p>
-            <p className='text-alternative font-black text-4xl'>R$ 280,00</p>
-            <p className='italic text-lg font-thin mb-4'>À vista no boleto ou PIX</p>
-            <Button><ShoppingCart size={32} strokeWidth={3} />Comprar</Button>
+		<li className="p-3 border flex flex-col justify-between border-secondary bg-background rounded-lg cursor-pointer group">
+			<div>
+				<div className="rounded-xl bg-primary w-full h-52 flex justify-center items-center overflow-hidden">
+					<Image
+						alt="Product"
+						width={1500}
+						height={900}
+						onError={() => setImageError(true)}
+						src={imageError ? FALLBACK_IMAGE : imageUrl}
+						className='w-full h-full'
+					/>
+				</div>
+				<h2 className="font-bold h-20 flex items-center text-4xl mt-3 mb-1">
+					{name}
+				</h2>
+				<p className="break-all line-clamp-2 text-ellipsis h-12 mb-4">{description}</p>
+			</div>
+			<div>
+				{discount && (
+					<p className="font-thin text-lg h-7 line-through opacity-60">
+						R$ {formatPrice(price)}
+					</p>
+				)}
+				<p className="text-alternative font-black text-4xl">
+					R$ {formatPrice(price - price * IN_CASH_DISCOUNT)}
+				</p>
+				<p className="italic text-lg h-7 font-thin mb-4">
+					{discount && <>À vista no boleto ou PIX</>}
+				</p>
+				<Button>
+					<ShoppingCart size={32} strokeWidth={3} />
+					Comprar
+				</Button>
+			</div>
 		</li>
 	)
 }
