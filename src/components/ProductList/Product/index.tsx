@@ -6,6 +6,7 @@ import { IProduct } from '@/lib/interfaces/Products'
 import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
 import { formatPrice } from '@/lib/helpers/formatters'
 import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Product({
 	id,
@@ -18,40 +19,44 @@ export default function Product({
 	const [imageError, setImageError] = useState(false)
 
 	return (
-		<li className="p-3 border flex flex-col justify-between border-secondary bg-background rounded-lg cursor-pointer group">
-			<div>
-				<div className="rounded-xl bg-primary w-full h-52 flex justify-center items-center overflow-hidden">
-					<Image
-						alt="Product"
-						width={1500}
-						height={900}
-						onError={() => setImageError(true)}
-						src={imageError ? FALLBACK_IMAGE : imageUrl}
-						className='w-full h-full'
-					/>
-				</div>
-				<h2 className="font-bold h-20 flex items-center text-4xl mt-3 mb-1">
-					{name}
-				</h2>
-				<p className="break-all line-clamp-2 text-ellipsis h-12 mb-4">{description}</p>
-			</div>
-			<div>
-				{discount && (
-					<p className="font-thin text-lg h-7 line-through opacity-60">
-						R$ {formatPrice(price)}
+		<li className="p-3 border flex flex-col justify-between border-secondary bg-background rounded-lg cursor-pointer group shadow-md hover:shadow-xl">
+			<Link href={`/products/${id}`}>
+				<div>
+					<div className="rounded-xl bg-primary w-full h-52 flex justify-center items-center overflow-hidden">
+						<Image
+							alt="Product"
+							width={1500}
+							height={900}
+							onError={() => setImageError(true)}
+							src={imageError ? FALLBACK_IMAGE : imageUrl}
+							className="w-full h-full"
+						/>
+					</div>
+					<h2 className="font-bold h-20 flex items-center text-4xl mt-3 mb-1">
+						{name}
+					</h2>
+					<p className="break-all line-clamp-2 text-ellipsis h-12 mb-4">
+						{description}
 					</p>
-				)}
-				<p className="text-alternative font-black text-4xl">
-					R$ {formatPrice(price - price * IN_CASH_DISCOUNT)}
-				</p>
-				<p className="italic text-lg h-7 font-thin mb-4">
-					{discount && <>À vista no boleto ou PIX</>}
-				</p>
-				<Button>
-					<ShoppingCart size={32} strokeWidth={3} />
-					Comprar
-				</Button>
-			</div>
+				</div>
+				<div>
+					{discount && (
+						<p className="font-thin text-lg h-7 line-through opacity-60">
+							R$ {formatPrice(price)}
+						</p>
+					)}
+					<p className="text-alternative font-black text-4xl">
+						R$ {formatPrice(discount ? price - price * IN_CASH_DISCOUNT : price)}
+					</p>
+					<p className="italic text-lg h-7 font-thin mb-4">
+						{discount && <>À vista no boleto ou PIX</>}
+					</p>
+				</div>
+			</Link>
+			<Button>
+				<ShoppingCart size={32} strokeWidth={3} />
+				Comprar
+			</Button>
 		</li>
 	)
 }

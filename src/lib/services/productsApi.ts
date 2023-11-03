@@ -15,3 +15,17 @@ export async function getProducts(): Promise<IProduct[]> {
 		}, 1500)
 	})
 }
+
+export async function getProductById(productId: number): Promise<IProduct> {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			const data = repository
+				.find<IProduct[]>('productList')
+				.find(({ id }) => id === productId)
+
+			if (data) resolve(data)
+
+			reject(new Error('NotFound'))
+		}, 1500)
+	})
+}

@@ -2,12 +2,17 @@ import Image, { StaticImageData } from 'next/image'
 
 interface BannerProps {
 	imagePath: StaticImageData;
+	product?: boolean;
 }
 
-export default function Banner({ imagePath }: Readonly<BannerProps>) {
+export default function Banner({ imagePath, product = false }: Readonly<BannerProps>) {
 	return (
-		<div className="flex items-center justify-end mt-20 w-full h-80 bg-blue-200 overflow-hidden">
-			<Image src={imagePath} alt='Coyote read Acme catalog' />
+		<div
+			className={` flex mt-20 w-full h-80  overflow-hidden ${
+				product ? 'items-start justify-start bg-alternative' : 'items-center justify-end bg-blue-200'
+			}`}
+		>
+			<Image src={imagePath} alt="Our most loyal customer" className={`${product && 'relative w-[68rem] -left-28'}`} />
 		</div>
 	)
 }

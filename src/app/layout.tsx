@@ -2,14 +2,16 @@ import type { Metadata } from 'next'
 import { Barlow, Khand } from 'next/font/google'
 import './globals.css'
 
+import Cart from '@/components/Cart'
+
 const barlow = Barlow({
 	subsets: ['latin'],
-	weight: ['900','700', '400', '100'],
+	weight: ['900', '700', '400', '100'],
 	variable: '--font-barlow',
 })
 const khand = Khand({
 	subsets: ['latin'],
-	weight: '400',
+	weight: ['400', '700'],
 	variable: '--font-khand',
 })
 
@@ -25,8 +27,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${barlow.variable} ${khand.variable} font-sans text-secondary`}>
+			<body
+				className={`${barlow.variable} ${khand.variable} font-sans text-secondary`}
+			>
 				{children}
+				<Cart/>
 			</body>
 		</html>
 	)

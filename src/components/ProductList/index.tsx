@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Product from './Product'
+
 import { IProduct } from '@/lib/interfaces/Products'
 import { getProducts } from '@/lib/services/productsApi'
 
@@ -11,17 +12,17 @@ export default function ProductList(props: Readonly<ProductListProps>) {
 	const [products, setProducts] = useState<IProduct[] | null>(null)
 
 	useEffect(() => {
-		async function fetchData() {
+		async function fetchProductList() {
 			try {
 				const data = await getProducts()
-				console.log(data)
+
 				setProducts(data)
 			} catch (error) {
 				console.log(error)
 			}
 		}
 
-		fetchData()
+		fetchProductList()
 	}, [])
 
 	return !products ? (
