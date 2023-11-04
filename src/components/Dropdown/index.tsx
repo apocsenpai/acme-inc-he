@@ -1,5 +1,4 @@
 import {
-	MouseEvent,
 	PropsWithChildren,
 	ReactElement,
 	useEffect,

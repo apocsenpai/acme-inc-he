@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 import Input from '@/components/Input'
 import { normalize } from '@/lib/helpers/formatters'
 import { handleFormErrors } from '@/lib/helpers/handleFormError'
-import { IUser } from '@/lib/interfaces/User'
 import { createUser, getAuthenticated } from '@/lib/services/user'
 import Link from 'next/link'
 

@@ -1,9 +1,15 @@
-"use client"
-
 function db() {
-	const storage = window.localStorage
+	const storage =
+		typeof window !== 'undefined' &&
+		window.localStorage
 
-	return storage
+	return (
+		storage || {
+			getItem: (key: string) => '',
+			setItem: (key: string, value: Object) => [],
+			removeItem: (key: string) => [],
+		}
+	)
 }
 
 function find<Type>(key: string): Type {
@@ -18,7 +24,7 @@ function create(key: string, value: Object) {
 	db().setItem(key, stringifyObject)
 }
 
-function remove(key: string){
+function remove(key: string) {
 	db().removeItem(key)
 }
 
