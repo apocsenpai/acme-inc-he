@@ -2,10 +2,10 @@
 
 import Button from '@/components/Button'
 import Input from '@/components/Input'
-import { signInUser } from '@/lib/services/user'
+import { getAuthenticated, signInUser } from '@/lib/services/user'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 interface ISignInForm {
@@ -22,6 +22,10 @@ export default function SignIn() {
 	})
 
 	const [formErrors, setFormErrors] = useState<string>('')
+
+	useEffect(()=>{
+		if(getAuthenticated()) return router.push("/")
+	} ,[router])
 
 	const handleOnChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
 		const inputValue = {

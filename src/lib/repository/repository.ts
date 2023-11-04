@@ -16,6 +16,10 @@ function create(key: string, value: Object) {
 	db().setItem(key, stringifyObject)
 }
 
-const repository = { find, create }
+function remove(key: string){
+	db().removeItem(key)
+}
+
+const repository = { find, create, remove }
 
 export default repository

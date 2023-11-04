@@ -8,7 +8,7 @@ import Input from '@/components/Input'
 import { normalize } from '@/lib/helpers/formatters'
 import { handleFormErrors } from '@/lib/helpers/handleFormError'
 import { IUser } from '@/lib/interfaces/User'
-import { createUser } from '@/lib/services/user'
+import { createUser, getAuthenticated } from '@/lib/services/user'
 import Link from 'next/link'
 
 interface ISignUpForm extends IUser {
@@ -28,7 +28,9 @@ export default function SignUp() {
 
 	const [formErrors, setFormErrors] = useState<{ [key: string]: string }>()
 
-	useEffect(()=> ,[])
+	useEffect(()=>{
+		if(getAuthenticated()) return router.push("/")
+	} ,[router])
 
 	const handleOnChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
 		const mask = normalize[e.target.name]

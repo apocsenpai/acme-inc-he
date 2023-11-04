@@ -54,9 +54,22 @@ export async function signInUser({
 
 			if (!user) return reject(new Error('Email ou senha inválidos!'))
 
+			const comparePassword = bcryptjs.compareSync(password, user.password)
+
+			if (!comparePassword)
+				return reject(new Error('Email ou senha inválidos!'))
+
 			resolve(repository.create('authenticated', { email, phone: user?.phone }))
 		}, 800)
 	})
+}
+
+export function getAuthenticated() {
+	return repository.find('authenticated')
+}
+
+export function logoutUser() {
+	return repository.remove('authenticated')
 }
 
 function findUserAlreadyExists(users: IUser[], currentEmail: string) {
