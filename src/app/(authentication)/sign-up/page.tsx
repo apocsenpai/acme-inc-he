@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import Button from '@/components/Button'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
@@ -9,6 +9,7 @@ import { normalize } from '@/lib/helpers/formatters'
 import { handleFormErrors } from '@/lib/helpers/handleFormError'
 import { IUser } from '@/lib/interfaces/User'
 import { createUser } from '@/lib/services/user'
+import Link from 'next/link'
 
 interface ISignUpForm extends IUser {
 	confirmedPassword: string;
@@ -26,6 +27,8 @@ export default function SignUp() {
 	})
 
 	const [formErrors, setFormErrors] = useState<{ [key: string]: string }>()
+
+	useEffect(()=> ,[])
 
 	const handleOnChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
 		const mask = normalize[e.target.name]
@@ -128,6 +131,12 @@ export default function SignUp() {
 
 				<Button className="mt-6">Registrar</Button>
 			</form>
+			<Link
+				href={'/sign-in'}
+				className="font-bold text-xl hover:text-alternative mt-6"
+			>
+				Ja é cadastrado? <span className="underline">Entre aqui.</span>
+			</Link>
 		</>
 	)
 }
