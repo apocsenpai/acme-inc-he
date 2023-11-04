@@ -1,13 +1,15 @@
 'use client'
 
-import { CartContext } from '@/contexts/CartContext'
-import { ShoppingCart } from 'lucide-react'
 import { KeyboardEvent, useContext, useEffect, useState } from 'react'
-import Button from '../Button'
+import { ShoppingCart } from 'lucide-react'
+
+import { CartContext } from '@/contexts/CartContext'
 import { ICartProduct } from '@/lib/interfaces/Cart'
 import { getCart } from '@/lib/services/cart'
-import Item from './Item'
 import { formatPrice } from '@/lib/helpers/formatters'
+
+import Button from '../Button'
+import Item from './Item'
 
 export default function Cart() {
 	const { activeCart, setActiveCart } = useContext(CartContext)
@@ -54,7 +56,7 @@ export default function Cart() {
 					<ShoppingCart strokeWidth={3} size={40} />
 					Carrinho
 				</h1>
-				<ul className="flex-grow h-96 overflow-y-auto">
+				<ul className="flex-grow h-96 overflow-y-auto px-2">
 					{cart ? (
 						cart.map((item) => <Item key={item.id} {...item} />)
 					) : (

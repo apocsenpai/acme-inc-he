@@ -1,13 +1,14 @@
-import Button from '@/components/Button'
-import { ShoppingCart } from 'lucide-react'
-import Image from 'next/image'
-
-import { IProduct } from '@/lib/interfaces/Products'
-import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
-import { formatPrice } from '@/lib/helpers/formatters'
 import { useContext, useState } from 'react'
+import Image from 'next/image'
+import { ShoppingCart } from 'lucide-react'
+import { toast } from 'react-toastify'
+
+import Button from '@/components/Button'
 import Link from 'next/link'
+import { IProduct } from '@/lib/interfaces/Products'
+import { formatPrice } from '@/lib/helpers/formatters'
 import { CartContext } from '@/contexts/CartContext'
+import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
 import { addItemToCart } from '@/lib/services/cart'
 
 export default function Product({
@@ -23,6 +24,7 @@ export default function Product({
 	const { setActiveCart } = useContext(CartContext)
 
 	const addToCart = () => {
+		toast.success(`${name} foi adicionado ao carrinho com sucesso!`)
 		setActiveCart(true)
 		addItemToCart({ id, name, description, imageUrl, price, discount })
 	}

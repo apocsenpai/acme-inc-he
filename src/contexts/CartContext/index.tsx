@@ -13,7 +13,7 @@ export const CartContext = React.createContext<ICartContext>({
 export const CartProvider = ({
 	children,
 }: Readonly<{ children: React.ReactNode }>) => {
-	const [activeCart, setActiveCart] = useState(true)
+	const [activeCart, setActiveCart] = useState(false)
 
 	const contextValue = useMemo(
 		() => ({ activeCart, setActiveCart }),

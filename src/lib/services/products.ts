@@ -12,7 +12,7 @@ export async function getProducts(): Promise<IProduct[]> {
 			if (data) resolve(data)
 
 			reject(new Error('NotFound'))
-		}, 1500)
+		}, 800)
 	})
 }
 
@@ -26,6 +26,6 @@ export async function getProductById(productId: number): Promise<IProduct> {
 			if (data) resolve(data)
 
 			reject(new Error('NotFound'))
-		}, 1500)
+		}, 800)
 	})
 }
