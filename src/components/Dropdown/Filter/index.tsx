@@ -1,10 +1,23 @@
 import Input from '@/components/Input'
+import { ChangeEvent } from 'react'
 
-export default function Filter() {
+interface IFilter {
+	toggleFavoriteFilter: () => void;
+	setNameFilter: (e: string) => void;
+}
+
+export default function Filter({
+	toggleFavoriteFilter,
+	setNameFilter,
+}: Readonly<IFilter>) {
 	return (
 		<>
 			<p className="font-bold text-lg">Nome</p>
-			<Input />
+			<Input
+				onChange={(e: ChangeEvent<HTMLInputElement>) =>
+					setNameFilter(e.target.value)
+				}
+			/>
 			<div className="flex items-center gap-3">
 				<span className="bg-alternative flex-grow border-t border-secondary inline-block"></span>
 				<span>ou</span>
@@ -16,6 +29,7 @@ export default function Filter() {
 					className="w-5 h-5 mt-1 cursor-pointer checked:bg-alternative appearance-none border border-secondary rounded"
 					id="favorites"
 					name="favorites"
+					onChange={() => toggleFavoriteFilter()}
 				/>
 				<label className="cursor-pointer font-bold text-lg" htmlFor="favorites">
 					Favoritos

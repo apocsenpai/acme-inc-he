@@ -28,9 +28,9 @@ export default function SignUp() {
 
 	const [formErrors, setFormErrors] = useState<{ [key: string]: string }>()
 
-	useEffect(()=>{
-		if(getAuthenticated()) return router.push("/")
-	} ,[router])
+	useEffect(() => {
+		if (getAuthenticated()) return router.push('/')
+	}, [router])
 
 	const handleOnChangeEvent = (e: ChangeEvent<HTMLInputElement>) => {
 		const mask = normalize[e.target.name]
@@ -45,7 +45,13 @@ export default function SignUp() {
 	}
 
 	const handleFormData = () => {
-		const errors = handleFormErrors({ ...formData })
+		const errors = handleFormErrors({
+			email: formData.email,
+			password: formData.password,
+			confirmedPassword: formData.confirmedPassword,
+			name: formData.name,
+			phone: formData.phone,
+		})
 
 		if (errors) {
 			setFormErrors(errors)

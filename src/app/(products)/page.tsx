@@ -6,8 +6,14 @@ import Filter from '@/components/Dropdown/Filter'
 import ProductList from '@/components/ProductList'
 import bannerImage from '@/lib/assets/acme-catalog.png'
 import { ListFilter } from 'lucide-react'
+import { useState } from 'react'
 
 export default function Home() {
+	const [favoriteFilter, setFavoriteFilter] = useState(false)
+	const [nameFilter, setNameFilter] = useState('')
+
+	const toggleFavoriteFilter = () => setFavoriteFilter(!favoriteFilter);
+
 	return (
 		<>
 			<Banner imagePath={bannerImage} />
@@ -20,11 +26,11 @@ export default function Home() {
 							icon={<ListFilter size={36} strokeWidth={3} />}
 							title={'Filtrar'}
 						>
-							<Filter />
+							<Filter toggleFavoriteFilter={toggleFavoriteFilter} setNameFilter={setNameFilter}/>
 						</Dropdown>
 					</div>
 				</header>
-				<ProductList />
+				<ProductList favoriteFilter={favoriteFilter} nameFilter={nameFilter}/>
 			</div>
 		</>
 	)
