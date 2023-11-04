@@ -1,5 +1,7 @@
+"use client"
+
 function db() {
-	const storage = typeof window !== 'undefined' && window.localStorage
+	const storage = window.localStorage
 
 	return storage
 }
