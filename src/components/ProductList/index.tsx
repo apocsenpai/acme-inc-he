@@ -16,7 +16,7 @@ interface ProductListProps {
 export default function ProductList(props: Readonly<ProductListProps>) {
 	const [products, setProducts] = useState<IProduct[] | null>(null)
 
-	const [user, setUser] = useState<IUser>()
+	const [user, setUser] = useState<IUser | null>(getAuthenticated())
 
 	const setAccordlyingFilter = (data: IProduct[]) => {
 		if (user?.favorites && props.favoriteFilter && props.nameFilter)
@@ -34,12 +34,6 @@ export default function ProductList(props: Readonly<ProductListProps>) {
 	}
 
 	useEffect(() => {
-		const user = getAuthenticated()
-
-		if (user) {
-			setUser(user)
-		}
-
 		async function fetchProductList() {
 			try {
 				const data = await getProducts()
@@ -51,7 +45,7 @@ export default function ProductList(props: Readonly<ProductListProps>) {
 		}
 
 		fetchProductList()
-	}, [setAccordlyingFilter, props.favoriteFilter, props.nameFilter])
+	}, [props.favoriteFilter, props.nameFilter, user])
 
 	return !products ? (
 		<div>Loading...</div>

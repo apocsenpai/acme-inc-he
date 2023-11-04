@@ -20,6 +20,10 @@ export default function Header() {
 		router.push('/sign-in')
 	}
 
+	const redirectToSignIn = () =>{
+		router.push('/sign-in')
+	}
+
 	return (
 		<header className="grid grid-cols-3 items-center z-10 bg-background w-full h-20 px-10 xl:px-40 fixed top-0 left-0 border-b-2 border-secondary border-opacity-25 shadow-header ">
 			<Link href={'/'}>
@@ -46,9 +50,9 @@ export default function Header() {
 							<LogOut size={32} strokeWidth={3} />
 						</button>
 					) : (
-						<Link href={'/sign-in'} className="hover:text-primary" title='Logar'>
+						<button onClick={redirectToSignIn} className="hover:text-primary" title='Logar'>
 							<LogIn size={32} strokeWidth={3} />
-						</Link>
+						</button>
 					)}
 				</div>
 			</nav>

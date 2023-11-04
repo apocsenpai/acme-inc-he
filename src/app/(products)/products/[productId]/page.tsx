@@ -35,7 +35,7 @@ export default function ProductPage({
 
 	const [imageError, setImageError] = useState(false)
 
-	const [user, setUser] = useState<IUser>()
+	const [user, setUser] = useState<IUser | null>(getAuthenticated())
 
 	const [activeStar, setActiveStar] = useState(false)
 
@@ -68,12 +68,7 @@ export default function ProductPage({
 			try {
 				const productId = Number(params.productId)
 
-				const user = getAuthenticated()
-
-				if (user) {
-					setUser(user)
-					setActiveStar(!!user.favorites[productId])
-				}
+				if (user?.favorites) setActiveStar(!!user.favorites[productId])
 
 				if (!productId) throw new Error('Produto não encontrado!')
 
@@ -87,7 +82,7 @@ export default function ProductPage({
 		}
 
 		fetchProduct()
-	}, [params.productId, router])
+	}, [params.productId, router, setActiveCart, user])
 
 	return (
 		<>

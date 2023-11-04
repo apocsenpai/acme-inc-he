@@ -23,7 +23,7 @@ export default function Product({
 }: Readonly<IProduct>) {
 	const [imageError, setImageError] = useState(false)
 
-	const [user, setUser] = useState<IUser>()
+	const [user, setUser] = useState<IUser | null>(getAuthenticated())
 
 	const [activeStar, setActiveStar] = useState(false)
 
@@ -36,19 +36,15 @@ export default function Product({
 	}
 
 	useEffect(() => {
-		const user = getAuthenticated()
 
-		if (user) {
-			setUser(user)
+		if (user?.favorites) setActiveStar(!!user.favorites[id])
 
-			setActiveStar(!!user.favorites[id])
-		}
-	}, [id, setActiveStar])
+	}, [id, setActiveStar, setActiveCart, user])
 
 	return (
 		<li className="relative p-3 border flex flex-col justify-between border-secondary bg-background rounded-lg cursor-pointer group shadow-md hover:shadow-xl">
 			<Link href={`/products/${id}`}>
-				{user && activeStar && (
+				{activeStar && (
 					<Star
 						size={24}
 						strokeWidth={3}

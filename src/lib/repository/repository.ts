@@ -1,31 +1,30 @@
-function db() {
-	const storage =
-		typeof window !== 'undefined' &&
-		window.localStorage
-
-	return (
-		storage || {
-			getItem: (key: string) => '',
-			setItem: (key: string, value: Object) => [],
-			removeItem: (key: string) => [],
+function find<Type>(key: string): Type | null {
+	if (typeof window !== 'undefined') {
+		const storedItem = localStorage.getItem(key)
+		if (storedItem !== null) {
+			try {
+				const item = JSON.parse(storedItem)
+				return item
+			} catch (error) {
+				console.error(error)
+			}
 		}
-	)
-}
-
-function find<Type>(key: string): Type {
-	const item = db().getItem(key)
-
-	return item ? JSON.parse(item) : null
+	}
+	return null
 }
 
 function create(key: string, value: Object) {
-	const stringifyObject = JSON.stringify(value)
+	if (typeof window !== 'undefined') {
+		const stringifyObject = JSON.stringify(value)
 
-	db().setItem(key, stringifyObject)
+		localStorage.setItem(key, stringifyObject)
+	}
 }
 
 function remove(key: string) {
-	db().removeItem(key)
+	if (typeof window !== 'undefined') {
+		localStorage.removeItem(key)
+	}
 }
 
 const repository = { find, create, remove }
