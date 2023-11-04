@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart, Star } from 'lucide-react'
 import { toast } from 'react-toastify'
 
 import Button from '@/components/Button'
@@ -10,6 +10,8 @@ import { formatPrice } from '@/lib/helpers/formatters'
 import { CartContext } from '@/contexts/CartContext'
 import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
 import { addItemToCart } from '@/lib/services/cart'
+import { IUser } from '@/lib/interfaces/User'
+import { getAuthenticated } from '@/lib/services/user'
 
 export default function Product({
 	id,
@@ -21,6 +23,10 @@ export default function Product({
 }: Readonly<IProduct>) {
 	const [imageError, setImageError] = useState(false)
 
+	const [user, setUser] = useState<IUser>()
+
+	const [activeStar, setActiveStar] = useState(false)
+
 	const { setActiveCart } = useContext(CartContext)
 
 	const addToCart = () => {
@@ -29,9 +35,26 @@ export default function Product({
 		addItemToCart({ id, name, description, imageUrl, price, discount })
 	}
 
+	useEffect(() => {
+		const user = getAuthenticated()
+
+		if (user) {
+			setUser(user)
+
+			setActiveStar(!!user.favorites[id])
+		}
+	}, [id, setActiveStar])
+
 	return (
-		<li className="p-3 border flex flex-col justify-between border-secondary bg-background rounded-lg cursor-pointer group shadow-md hover:shadow-xl">
+		<li className="relative p-3 border flex flex-col justify-between border-secondary bg-background rounded-lg cursor-pointer group shadow-md hover:shadow-xl">
 			<Link href={`/products/${id}`}>
+				{user && activeStar && (
+					<Star
+						size={24}
+						strokeWidth={3}
+						className={`absolute top-5 right-5 fill-alternative text-alternative`}
+					/>
+				)}
 				<div>
 					<div className="rounded-xl bg-primary w-full h-52 flex justify-center items-center overflow-hidden">
 						<Image

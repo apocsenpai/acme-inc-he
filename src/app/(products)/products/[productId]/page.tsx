@@ -72,8 +72,6 @@ export default function ProductPage({
 
 				if (user) {
 					setUser(user)
-
-					console.log(user.favorites[productId])
 					setActiveStar(!!user.favorites[productId])
 				}
 
