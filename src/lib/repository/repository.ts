@@ -1,5 +1,5 @@
 function db() {
-	const storage = window.localStorage
+	const storage = typeof window !== 'undefined' && window.localStorage
 
 	return storage
 }
