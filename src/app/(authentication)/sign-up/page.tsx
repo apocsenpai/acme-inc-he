@@ -11,7 +11,11 @@ import { IUser } from '@/lib/interfaces/User'
 import { createUser, getAuthenticated } from '@/lib/services/user'
 import Link from 'next/link'
 
-interface ISignUpForm extends IUser {
+interface ISignUpForm {
+	name: string;
+	email: string;
+	password: string;
+	phone: string;
 	confirmedPassword: string;
 }
 
@@ -70,6 +74,7 @@ export default function SignUp() {
 				password: formData.password,
 				name: formData.name,
 				phone: formData.phone,
+				favorites: {},
 			})
 
 			router.push('/')
