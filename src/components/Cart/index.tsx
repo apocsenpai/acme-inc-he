@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import { CartContext } from '@/contexts/CartContext'
 import { ICartProduct } from '@/lib/interfaces/Cart'
-import { getCart, sendOrder } from '@/lib/services/cart'
+import { getCart, removeCart, sendOrder } from '@/lib/services/cart'
 import { formatPrice } from '@/lib/helpers/formatters'
 
 import Button from '../Button'
@@ -54,6 +54,10 @@ export default function Cart() {
 
 		try {
 			await sendOrder(orderBody)
+
+			removeCart()
+
+			closeCart()
 
 			toast.success('Compra finalizada com sucesso!')
 		} catch (error) {

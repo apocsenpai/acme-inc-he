@@ -12,6 +12,10 @@ export function addItemToCart(item: IProduct) {
 	repository.create('cart', addQuantityIfExists(data, item))
 }
 
+export function removeCart() {
+	repository.remove('cart')
+}
+
 export async function sendOrder(order: IOrder) {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -33,8 +37,6 @@ function addQuantityIfExists(
 	const indexAddedAlready = cart.findIndex(
 		(cartItem) => cartItem.id === item.id
 	)
-
-	console.log(indexAddedAlready)
 
 	if (indexAddedAlready >= 0) {
 		cart[indexAddedAlready] = {

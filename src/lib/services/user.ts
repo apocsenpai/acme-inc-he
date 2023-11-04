@@ -59,9 +59,43 @@ export async function signInUser({
 			if (!comparePassword)
 				return reject(new Error('Email ou senha inválidos!'))
 
-			resolve(repository.create('authenticated', { email, phone: user?.phone }))
+			resolve(
+				repository.create('authenticated', {
+					email,
+					phone: user?.phone,
+					favorites: user?.favorites || {},
+				})
+			)
 		}, 800)
 	})
+}
+
+export function favoriteItem(email: string, productId: number) {
+	const users = repository.find<IUser[]>('users')
+
+	const userIndex = users.findIndex((user) => user.email === email)
+
+	users[userIndex] = {
+		...users[userIndex],
+		favorites: {
+			...users[userIndex]?.favorites,
+			[productId]: true,
+		},
+	}
+
+	repository.create('users', users)
+	repository.create('authenticated', users[userIndex])
+}
+
+export function removeFavorite(email: string, productId: number) {
+	const users = repository.find<IUser[]>('users')
+
+	const userIndex = users.findIndex((user) => user.email === email)
+
+	delete users[userIndex].favorites[productId]
+
+	repository.create('users', users)
+	repository.create('authenticated', users[userIndex])
 }
 
 export function getAuthenticated() {

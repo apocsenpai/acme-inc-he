@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { toast } from 'react-toastify'
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart, Star } from 'lucide-react'
 
 import { CartContext } from '@/contexts/CartContext'
 import { IProduct } from '@/lib/interfaces/Products'
@@ -16,6 +16,12 @@ import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
 import { formatPrice } from '@/lib/helpers/formatters'
 import Button from '@/components/Button'
 import Banner from '@/components/Banner'
+import {
+	favoriteItem,
+	getAuthenticated,
+	removeFavorite,
+} from '@/lib/services/user'
+import { IUser } from '@/lib/interfaces/User'
 
 interface IProductPage {
 	params: { productId: string };
@@ -29,6 +35,10 @@ export default function ProductPage({
 
 	const [imageError, setImageError] = useState(false)
 
+	const [user, setUser] = useState<IUser>()
+
+	const [activeStar, setActiveStar] = useState(false)
+
 	const router = useRouter()
 
 	const { setActiveCart } = useContext(CartContext)
@@ -41,10 +51,31 @@ export default function ProductPage({
 		addItemToCart(product)
 	}
 
+	const onStarClick = () => {
+		if (user?.email && product?.id) {
+			if (!activeStar) {
+				favoriteItem(user.email, product.id)
+				return setActiveStar(true)
+			} else {
+				removeFavorite(user.email, product.id)
+				return setActiveStar(false)
+			}
+		}
+	}
+
 	useEffect(() => {
 		async function fetchProduct() {
 			try {
 				const productId = Number(params.productId)
+
+				const user = getAuthenticated()
+
+				if (user) {
+					setUser(user)
+
+					console.log(user.favorites[productId])
+					setActiveStar(!!user.favorites[productId])
+				}
 
 				if (!productId) throw new Error('Produto não encontrado!')
 
@@ -69,7 +100,21 @@ export default function ProductPage({
 						<h1 className="text-7xl font-alt self-start mb-4">
 							{product.name}
 						</h1>
-						<div className="grid grid-cols-2 gap-6">
+						<div className="relative grid grid-cols-2 gap-6">
+							{user && (
+								<button
+									className={` absolute top-2 right-2 hover:text-alternative ${
+										activeStar ? 'text-alternative' : 'text-secondary'
+									}`}
+									onClick={onStarClick}
+								>
+									<Star
+										size={32}
+										strokeWidth={3}
+										className={`${activeStar && 'fill-alternative'}`}
+									/>
+								</button>
+							)}
 							<div className="rounded-xl bg-primary w-full flex justify-center items-center overflow-hidden">
 								<Image
 									alt={`Product ${product.name}`}
