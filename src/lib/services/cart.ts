@@ -1,4 +1,4 @@
-import { ICartProduct } from '../interfaces/Cart'
+import { ICartProduct, IOrder } from '../interfaces/Cart'
 import { IProduct } from '../interfaces/Products'
 import repository from '../repository/repository'
 
@@ -10,6 +10,16 @@ export function addItemToCart(item: IProduct) {
 	const data = repository.find<ICartProduct[]>('cart')
 
 	repository.create('cart', addQuantityIfExists(data, item))
+}
+
+export async function sendOrder(order: IOrder) {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			//JSON gerado
+
+			resolve(repository.create('order', order))
+		}, 800)
+	})
 }
 
 function addQuantityIfExists(
@@ -24,7 +34,7 @@ function addQuantityIfExists(
 		(cartItem) => cartItem.id === item.id
 	)
 
-        console.log(indexAddedAlready)
+	console.log(indexAddedAlready)
 
 	if (indexAddedAlready >= 0) {
 		cart[indexAddedAlready] = {

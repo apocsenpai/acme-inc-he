@@ -65,7 +65,7 @@ export async function signInUser({
 }
 
 export function getAuthenticated() {
-	return repository.find('authenticated')
+	return repository.find<IUser>('authenticated')
 }
 
 export function logoutUser() {
