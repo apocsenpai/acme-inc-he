@@ -41,7 +41,7 @@ export default function Cart() {
 		if (!user) {
 			toast.error('Usuário deve estar logado para finalizar a compra!')
 
-			router.push('/sign-in')
+			return router.push('/sign-in')
 		}
 
 		if (!cart) toast.info('Adicione algum item no carrinho antes de finalizar!')
