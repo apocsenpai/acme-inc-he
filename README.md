@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  <br>
+  <a href="https://acme-inc-he.vercel.app/"><img src="https://github.com/apocsenpai/acme-inc-he/assets/87510640/20343cb1-e77c-42bd-b6e9-1ab7772e36d8" alt="Acme inc" /></a>
+  <br>
+    Acme Inc - E-Commerce - Hype Empreendimentos technical test
+  <br>
+</h1>
 
-## Getting Started
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=next" width="50"/>
+  </a>
+</p>
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<p align="center">
+  <a href="#about">About</a> •
+  <a href="#stacks">Stacks</a> •
+  <a href="#requirements">Requirements</a> •
+  <a href="#license">License</a> •
+  <a href="#contact-me">Contact me</a>
+</p>
+
+#### Product page (unlogged users)
+![image](https://github.com/apocsenpai/acme-inc-he/assets/87510640/0bb0d650-5360-4883-9d65-cf3e0b8cb041)
+
+#### Sign-up page
+![image](https://github.com/apocsenpai/acme-inc-he/assets/87510640/a84dbf94-368a-47d0-85b0-3f15daeda8f0)
+
+#### Product page (logged users)
+![image](https://github.com/apocsenpai/acme-inc-he/assets/87510640/820182de-eac6-433e-8bb6-aa792139daf5)
+
+#### Home page (logged users - The favorite star only shows when users are logged in)
+![image](https://github.com/apocsenpai/acme-inc-he/assets/87510640/4bbe27c9-e26c-40c0-90bd-25c051e68548)
+
+
+## About
+
+This app is a technical test carried out for a front-end developer at  [Hype Empreendimentos](https://www.linkedin.com/company/hypeempreendimentos/). This technical test is an e-commerce project in which products are generated randomly based on a list of verbs and adjectives, without repeating names. The data used for the application's operation was stored in LocalStorage to simulate a database.
+
+## Stacks
+
+```md
+##### FrontEnd ##### 
+    Next.js, React, TailwindCSS
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Requirements
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You need installing [Git](https://git-scm.com) and [Node 20.9.0 - LTS and npm](https://nodejs.org/en);
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+# Clone this repository
+$ git clone https://github.com/apocsenpai/acme-inc-he
 
-## Learn More
+# Go into the directory
+$ cd acme-inc-he
 
-To learn more about Next.js, take a look at the following resources:
+# install deps
+$ npm i
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# start app
+$ npm run dev
+```
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[Mozilla Public License 2.0](https://github.com/apocsenpai/Salve/blob/main/LICENSE)
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Contact me
+> GitHub [@apocsenpai](https://github.com/apocsenpai) &nbsp;&middot;&nbsp;
+> Email [sennasjonatas@gmail.com](mailto:sennasjonatas@gmail.com) &nbsp;&middot;&nbsp;
+> Linkedin [Jonatas Sennas](https://www.linkedin.com/in/jonatassennas/)
