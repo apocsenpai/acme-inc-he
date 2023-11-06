@@ -9,6 +9,8 @@ export function getCart() {
 export function addItemToCart(item: IProduct) {
 	const data = repository.find<ICartProduct[]>('cart')
 
+	if(!data) return repository.create('cart', [{...item, quantity: 1}])
+
 	repository.create('cart', addQuantityIfExists(data, item))
 }
 
@@ -31,8 +33,6 @@ function addQuantityIfExists(
 	item: IProduct
 ): ICartProduct[] {
 	const cart = oldCart
-
-	if (!cart) return [{ ...item, quantity: 1 }]
 
 	const indexAddedAlready = cart.findIndex(
 		(cartItem) => cartItem.id === item.id

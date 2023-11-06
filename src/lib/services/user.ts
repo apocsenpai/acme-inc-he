@@ -73,6 +73,8 @@ export async function signInUser({
 export function favoriteItem(email: string, productId: number) {
 	const users = repository.find<IUser[]>('users')
 
+	if(!users) return null
+
 	const userIndex = users.findIndex((user) => user.email === email)
 
 	users[userIndex] = {
@@ -89,6 +91,8 @@ export function favoriteItem(email: string, productId: number) {
 
 export function removeFavorite(email: string, productId: number) {
 	const users = repository.find<IUser[]>('users')
+
+	if(!users) return null
 
 	const userIndex = users.findIndex((user) => user.email === email)
 

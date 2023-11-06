@@ -1,5 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'
+'use client'
+
+import { useCallback, useEffect, useState } from 'react'
 import Product from './Product'
 
 import { IProduct } from '@/lib/interfaces/Products'
@@ -18,20 +19,24 @@ export default function ProductList(props: Readonly<ProductListProps>) {
 
 	const [user, setUser] = useState<IUser | null>(getAuthenticated())
 
-	const setAccordlyingFilter = (data: IProduct[]) => {
-		if (user?.favorites && props.favoriteFilter && props.nameFilter)
+	const setAccordlyingFilter = useCallback(
+		(data: IProduct[]) => {
+			if (user?.favorites && props.favoriteFilter && props.nameFilter)
+				return data
+					.filter(({ id }) => user.favorites[id])
+					.filter(({ name }) => name.includes(props.nameFilter))
+
+			if (user?.favorites && props.favoriteFilter)
+				return data.filter(({ id }) => user.favorites[id])
+
+			if (props.nameFilter)
+				return data.filter(({ name }) =>
+					name.toLocaleLowerCase().includes(props.nameFilter)
+				)
 			return data
-				.filter(({ id }) => user.favorites[id])
-				.filter(({ name }) => name.includes(props.nameFilter))
-
-		if (user?.favorites && props.favoriteFilter)
-			return data.filter(({ id }) => user.favorites[id])
-
-		if (props.nameFilter)
-			return data.filter(({ name }) => name.toLocaleLowerCase().includes(props.nameFilter))
-
-		return data
-	}
+		},
+		[props.favoriteFilter, props.nameFilter, user?.favorites]
+	)
 
 	useEffect(() => {
 		async function fetchProductList() {
@@ -45,7 +50,7 @@ export default function ProductList(props: Readonly<ProductListProps>) {
 		}
 
 		fetchProductList()
-	}, [props.favoriteFilter, props.nameFilter, user])
+	}, [props.favoriteFilter, props.nameFilter, user, setAccordlyingFilter])
 
 	return !products ? (
 		<div>Loading...</div>

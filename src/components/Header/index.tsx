@@ -25,11 +25,10 @@ export default function Header() {
 	}
 
 	return (
-		<header className="grid grid-cols-3 items-center z-10 bg-background w-full h-20 px-10 xl:px-40 fixed top-0 left-0 border-b-2 border-secondary border-opacity-25 shadow-header ">
+		<header className="grid grid-cols-2 items-center z-10 bg-background w-full h-20 px-10 xl:px-40 fixed top-0 left-0 border-b-2 border-secondary border-opacity-25 shadow-header ">
 			<Link href={'/'}>
 				<Image src={logo} className="w-28" alt="Logo Acme" />
 			</Link>
-			<Input icon={<Search size={28} strokeWidth={3} />} />
 			<nav className="flex items-center justify-end gap-20">
 				<Link
 					href={'/'}

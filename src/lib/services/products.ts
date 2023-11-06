@@ -19,11 +19,13 @@ export async function getProducts(): Promise<IProduct[]> {
 export async function getProductById(productId: number): Promise<IProduct> {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			const data = repository
-				.find<IProduct[]>('productList')
-				.find(({ id }) => id === productId)
+			const data = repository.find<IProduct[]>('productList')
 
-			if (data) resolve(data)
+			if (data) {
+				const product = data.find(({ id }) => id === productId)
+
+				return product ? resolve(product) : reject(new Error('NotFound'))
+			}
 
 			reject(new Error('NotFound'))
 		}, 800)
