@@ -36,7 +36,9 @@
 
 ## About
 
-This app is a technical test carried out for a front-end developer at  [Hype Empreendimentos](https://www.linkedin.com/company/hypeempreendimentos/). This technical test is an e-commerce project in which products are generated randomly based on a list of verbs and adjectives, without repeating names. The data used for the application's operation was stored in LocalStorage to simulate a database.
+This app is a technical test carried out for a front-end developer at  [Hype Empreendimentos](https://www.linkedin.com/company/hypeempreendimentos/). This technical test is an e-commerce project in which products are generated randomly based on a list of verbs and adjectives, without repeating names. The data used for the application's operation was stored in LocalStorage to simulate a database. 
+
+The deploy link is available [here](https://acme-inc-he.vercel.app).
 
 ## Stacks
 
