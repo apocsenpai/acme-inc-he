@@ -40,7 +40,7 @@ export default function Cart() {
 
 		if (!user) {
 			toast.error('Usuário deve estar logado para finalizar a compra!')
-
+			closeCart()
 			return router.push('/sign-in')
 		}
 
