@@ -3,14 +3,14 @@
 import Image from 'next/image'
 import logo from '@/lib/assets/logo.png'
 import Link from 'next/link'
-import { LogIn, LogOut, ShoppingCart } from 'lucide-react'
+import { Home, LogIn, LogOut, ShoppingCart } from 'lucide-react'
 import { useContext, useEffect, useState } from 'react'
 import { CartContext } from '@/contexts/CartContext'
 import { logoutUser } from '@/lib/services/user'
 import { useRouter } from 'next/navigation'
 import { UserContext } from '@/contexts/UserContext'
 
-export default function Header() {
+export default function Footer() {
 	const { setActiveCart } = useContext(CartContext)
 	const { user } = useContext(UserContext)
 
@@ -31,19 +31,12 @@ export default function Header() {
 	}, [user])
 
 	return (
-		<header className=" flex justify-center sm:grid sm:grid-cols-2 items-center z-10 bg-background w-full h-20 px-10 xl:px-40 fixed top-0 left-0 sm:border-b-2 border-secondary border-opacity-25 sm:shadow-header ">
-			<Link href={'/'} data-testid="logo">
-				<Image src={logo} className="w-28" alt="Logo Acme" />
-			</Link>
-			<nav className="hidden sm:flex items-center justify-end gap-20">
-				<Link
-					href={'/'}
-					className="text-2xl font-bold font-sans text-secondary hover:text-primary"
-					data-testid="products-button"
-				>
-					Produtos
-				</Link>
-				<div className="flex gap-10">
+		<footer className="sm:hidden flex justify-center items-center z-10 bg-background w-full h-16 px-10 xl:px-40
+                fixed bottom-0 left-0 border-t-2 border-secondary border-opacity-25">
+			<nav className=" flex items-center justify-end gap-20">
+
+				<div className="flex justify-between items-center gap-20">
+                    <button onClick={() => router.push("/")}><Home size={32} strokeWidth={3} /></button>
 					<button
 						onClick={() => setActiveCart(true)}
 						className="hover:text-primary"
@@ -73,6 +66,6 @@ export default function Header() {
 					)}
 				</div>
 			</nav>
-		</header>
+		</footer>
 	)
 }

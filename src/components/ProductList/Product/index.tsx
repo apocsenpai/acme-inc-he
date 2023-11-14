@@ -10,8 +10,7 @@ import { formatPrice } from '@/lib/helpers/formatters'
 import { CartContext } from '@/contexts/CartContext'
 import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
 import { addItemToCart } from '@/lib/services/cart'
-import { IUser } from '@/lib/interfaces/User'
-import { getAuthenticated } from '@/lib/services/user'
+import { UserContext } from '@/contexts/UserContext'
 
 export default function Product({
 	id,
@@ -23,7 +22,7 @@ export default function Product({
 }: Readonly<IProduct>) {
 	const [imageError, setImageError] = useState(false)
 
-	const [user, setUser] = useState<IUser | null>(getAuthenticated())
+	const { user } = useContext(UserContext)
 
 	const [activeStar, setActiveStar] = useState(false)
 

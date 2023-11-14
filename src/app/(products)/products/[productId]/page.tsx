@@ -16,12 +16,8 @@ import { FALLBACK_IMAGE, IN_CASH_DISCOUNT } from '@/lib/utils/constants/values'
 import { formatPrice } from '@/lib/helpers/formatters'
 import Button from '@/components/Button'
 import Banner from '@/components/Banner'
-import {
-	favoriteItem,
-	getAuthenticated,
-	removeFavorite,
-} from '@/lib/services/user'
-import { IUser } from '@/lib/interfaces/User'
+import { favoriteItem, removeFavorite } from '@/lib/services/user'
+import { UserContext } from '@/contexts/UserContext'
 
 interface IProductPage {
 	params: { productId: string };
@@ -35,7 +31,7 @@ export default function ProductPage({
 
 	const [imageError, setImageError] = useState(false)
 
-	const [user, setUser] = useState<IUser | null>(getAuthenticated())
+	const { user } = useContext(UserContext)
 
 	const [activeStar, setActiveStar] = useState(false)
 
@@ -88,12 +84,12 @@ export default function ProductPage({
 		<>
 			<Banner imagePath={bannerImage} product={true} />
 			{product ? (
-				<main className="flex flex-col items-center px-10 xl:px-40 py-16">
+				<main className="flex flex-col items-center px-10 xl:px-40 py-16 mt-10 md:mt-0">
 					<div className="2xl:w-5/6">
-						<h1 className="text-7xl font-alt self-start mb-4">
+						<h1 className="text-4xl md:text-7xl font-alt self-start mb-4">
 							{product.name}
 						</h1>
-						<div className="relative grid grid-cols-2 gap-6">
+						<div className="relative grid grid-cols-1 sm:grid-cols-2 sm:gap-6">
 							{user && (
 								<button
 									className={` absolute top-2 right-2 hover:text-alternative ${
@@ -120,7 +116,7 @@ export default function ProductPage({
 							</div>
 							<div className="flex flex-col justify-between">
 								<div>
-									<h2 className="font-bold h-20 flex items-center text-4xl mt-3 mb-1">
+									<h2 className="font-bold h-20 flex items-center text-2xl md:text-4xl mt-3 mb-1">
 										{product.name}
 									</h2>
 									<p className="break-all text-xl mb-4">
@@ -129,11 +125,11 @@ export default function ProductPage({
 								</div>
 								<div>
 									{product.discount && (
-										<p className="font-thin text-xl h-7 line-through opacity-60">
+										<p className="font-thin text-lg md:text-xl h-7 line-through opacity-60">
 											R$ {formatPrice(product.price)}
 										</p>
 									)}
-									<p className="text-alternative font-black text-5xl">
+									<p className="text-alternative font-black text-3xl md:text-5xl">
 										R${' '}
 										{formatPrice(
 											product.discount
@@ -141,7 +137,7 @@ export default function ProductPage({
 												: product.price
 										)}
 									</p>
-									<p className="italic text-xl h-7 font-thin mt-2">
+									<p className="italic text-lg md:text-xl h-7 font-thin mt-2">
 										{product.discount && <>À vista no boleto ou PIX</>}
 									</p>
 								</div>

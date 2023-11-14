@@ -17,11 +17,11 @@ export default function Home() {
 	return (
 		<>
 			<Banner imagePath={bannerImage} />
-			<div className="px-10 xl:px-40 py-16">
-				<header className="flex items-center gap-10 border-b-2 pb-4 border-secondary border-opacity-20">
-					<h1 className="text-7xl font-alt">Nossos Produtos</h1>
-					<div className='self-stretch w-[1px] bg-secondary bg-opacity-20'/>
-					<div className="flex gap-20 items-center">
+			<div className="px-10 xl:px-40 py-16  mt-10 md:mt-0">
+				<header className="flex justify-between md:justify-start items-center gap-4 md:gap-10 border-b-2 pb-4 border-secondary border-opacity-20">
+					<h1 className="text-4xl md:text-7xl font-alt">Nossos Produtos</h1>
+					<div className='hidden md:block self-stretch w-[1px] bg-secondary bg-opacity-20'/>
+					<div className="flex items-center">
 						<Dropdown
 							icon={<ListFilter size={36} strokeWidth={3} />}
 							title={'Filtrar'}

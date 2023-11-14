@@ -1,7 +1,7 @@
 'use client'
 
 import { KeyboardEvent, useContext, useEffect, useState } from 'react'
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart, X } from 'lucide-react'
 import { toast } from 'react-toastify'
 
 import { CartContext } from '@/contexts/CartContext'
@@ -80,8 +80,12 @@ export default function Cart() {
 	}, [activeCart])
 
 	return activeCart ? (
-		<div className="overflow-hidden w-full bg-secondary bg-opacity-30 min-h-screen top-0 left-0 z-20 fixed grid grid-cols-[1fr,_40rem]">
-			<div onClick={closeCart} onKeyDown={handleKeyDown} className=""></div>
+		<div className="overflow-hidden w-full bg-secondary bg-opacity-30 min-h-screen top-0 left-0 z-20 fixed grid grid-cols-[1fr] md:grid-cols-[1fr,_40rem]">
+			<div
+				onClick={closeCart}
+				onKeyDown={handleKeyDown}
+				className="hidden md:block"
+			></div>
 			<div
 				className={`relative py-8 px-6 top-0 transition-all bg-secondary animate-slideCart flex flex-col justify-between gap-8`}
 			>
@@ -89,6 +93,12 @@ export default function Cart() {
 					<ShoppingCart strokeWidth={3} size={40} />
 					Carrinho
 				</h1>
+				<button
+					onClick={closeCart}
+					className="absolute top-4 right-4 text-alternative hover:text-primary"
+				>
+					<X size={32} strokeWidth={3} />
+				</button>
 				<ul className="flex-grow h-96 overflow-y-auto px-2">
 					{cart ? (
 						cart.map((item) => <Item key={item.id} {...item} />)

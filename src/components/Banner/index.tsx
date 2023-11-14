@@ -8,7 +8,7 @@ interface BannerProps {
 export default function Banner({ imagePath, product = false }: Readonly<BannerProps>) {
 	return (
 		<div
-			className={` flex mt-20 w-full h-80  overflow-hidden ${
+			className={`hidden md:flex mt-20 w-full h-80  overflow-hidden ${
 				product ? 'items-start justify-start bg-alternative' : 'items-center justify-end bg-blue-200'
 			}`}
 		>

@@ -28,7 +28,7 @@ export default function Item({
 			</div>
 			<div className="flex flex-col justify-between flex-grow">
 				<p className="text-alternative font-bold text-2xl">{name}</p>
-				<div className="w-full text-alternative font-bold text-lg flex justify-between">
+				<div className="w-full text-alternative font-bold text-lg flex justify-between flex-col sm:flex-row">
 					<span>Quantidade: {quantity}</span>
 					<span>
 						Price:{' '}

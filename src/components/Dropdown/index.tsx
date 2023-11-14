@@ -45,9 +45,9 @@ export default function Dropdown({
 				}`}
 				onClick={toggleDropdown}
 			>
-				{icon} {title}
+				{icon} <span className='hidden md:inline'>{title}</span>
 			</button>
-			<div className="w-64 absolute -left-12 h-60 z-10 overflow-hidden">
+			<div className="w-64 absolute -left-48 md:-left-12 h-60 z-10 overflow-hidden">
 				<div
 					className={`w-full bg-background absolute shadow-xl p-4 rounded-lg border
                         border-secondary transition-all duration-300 ${
