@@ -24,14 +24,14 @@ export default function ProductList(props: Readonly<ProductListProps>) {
 			if (user?.favorites && props.favoriteFilter && props.nameFilter)
 				return data
 					.filter(({ id }) => user.favorites[id])
-					.filter(({ name }) => name.includes(props.nameFilter))
+					.filter(({ name }) => name.toLocaleLowerCase().includes(props.nameFilter.toLocaleLowerCase()))
 
 			if (user?.favorites && props.favoriteFilter)
 				return data.filter(({ id }) => user.favorites[id])
 
 			if (props.nameFilter)
 				return data.filter(({ name }) =>
-					name.toLocaleLowerCase().includes(props.nameFilter)
+					name.toLocaleLowerCase().includes(props.nameFilter.toLocaleLowerCase())
 				)
 			return data
 		},
